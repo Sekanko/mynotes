@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "74830291312",
+    "project_id": "sekanko-mynotes-flutter",
+    "storage_bucket": "sekanko-mynotes-flutter.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:74830291312:android:0362846f511d94a57d6fb5",
+        "android_client_info": {
+          "package_name": "pl.Sekanko.mynotes"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBAFo08mHuAfeDe3kFEUdFsTJhn_w1FTA4"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

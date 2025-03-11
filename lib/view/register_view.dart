@@ -33,63 +33,117 @@ class _RegisterViewState extends State<RegisterView> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        appBar: AppBar(
-          title: const Text(
+      appBar: AppBar(
+        title: const Text(
             'Register',
-            style: TextStyle(color: Colors.white),
-          ),
-          backgroundColor: Colors.blue,
+          style: TextStyle(color: Colors.white),
         ),
-        body: FutureBuilder(
-          future: Firebase.initializeApp(
-              options: DefaultFirebaseOptions.currentPlatform
+        backgroundColor: Colors.blue,
+      ),
+      body: Column(
+        children: [
+          TextField(
+            controller: _email,
+            enableSuggestions: false,
+            autocorrect: false,
+            keyboardType: TextInputType.emailAddress,
+            decoration: const InputDecoration(
+                hintText: 'Enter your email'
+            ),
           ),
-          builder: (context, snapshot) {
-            switch(snapshot.connectionState){
-              case ConnectionState.done:
-                return Column(
-                  children: [
-                    TextField(
-                      controller: _email,
-                      enableSuggestions: false,
-                      autocorrect: false,
-                      keyboardType: TextInputType.emailAddress,
-                      decoration: const InputDecoration(
-                          hintText: 'Enter your email'
-                      ),
-                    ),
-                    TextField(
-                      controller: _password,
-                      obscureText: true,
-                      enableSuggestions: false,
-                      autocorrect: false,
-                      decoration: const InputDecoration(
-                          hintText: 'Enter your password'
-                      ),
-                    ),
-                    TextButton(
-                        onPressed: () async {
-                          final email = _email.text;
-                          final password = _password.text;
-                          try {
-                            final userCredential =
-                            await FirebaseAuth.instance.createUserWithEmailAndPassword(
-                              email: email,
-                              password: password,
-                            );
-                          } on FirebaseAuthException catch (e){
-
-                          }
-                        },
-                        child: const Text("Register")),
-                  ],
+          TextField(
+            controller: _password,
+            obscureText: true,
+            enableSuggestions: false,
+            autocorrect: false,
+            decoration: const InputDecoration(
+                hintText: 'Enter your password'
+            ),
+          ),
+          TextButton(
+              onPressed: () async {
+                final email = _email.text;
+                final password = _password.text;
+                try {
+                  final userCredential =
+                  await FirebaseAuth.instance.createUserWithEmailAndPassword(
+                    email: email,
+                    password: password,
+                  );
+                } on FirebaseAuthException catch (e){}
+              },
+              child: const Text("Register")
+          ),
+          TextButton(
+              onPressed: (){
+                Navigator.of(context).pushNamedAndRemoveUntil(
+                    '/login/',
+                    (route) => false,
                 );
-              default:
-                return const Text('Loading...');
-
-            }
-          },
-        )
+              },
+              child: Text('Already registered? Login here!')
+          )
+        ],
+      ),
     );
+    // return Scaffold(
+    //     appBar: AppBar(
+    //       title: const Text(
+    //         'Register',
+    //         style: TextStyle(color: Colors.white),
+    //       ),
+    //       backgroundColor: Colors.blue,
+    //     ),
+    //     body: FutureBuilder(
+    //       future: Firebase.initializeApp(
+    //           options: DefaultFirebaseOptions.currentPlatform
+    //       ),
+    //       builder: (context, snapshot) {
+    //         switch(snapshot.connectionState){
+    //           case ConnectionState.done:
+    //             return Column(
+    //               children: [
+    //                 TextField(
+    //                   controller: _email,
+    //                   enableSuggestions: false,
+    //                   autocorrect: false,
+    //                   keyboardType: TextInputType.emailAddress,
+    //                   decoration: const InputDecoration(
+    //                       hintText: 'Enter your email'
+    //                   ),
+    //                 ),
+    //                 TextField(
+    //                   controller: _password,
+    //                   obscureText: true,
+    //                   enableSuggestions: false,
+    //                   autocorrect: false,
+    //                   decoration: const InputDecoration(
+    //                       hintText: 'Enter your password'
+    //                   ),
+    //                 ),
+    //                 TextButton(
+    //                     onPressed: () async {
+    //                       final email = _email.text;
+    //                       final password = _password.text;
+    //                       try {
+    //                         final userCredential =
+    //                         await FirebaseAuth.instance.createUserWithEmailAndPassword(
+    //                           email: email,
+    //                           password: password,
+    //                         );
+    //                       } on FirebaseAuthException catch (e){
+    //
+    //                       }
+    //                     },
+    //                     child: const Text("Register")),
+    //               ],
+    //             );
+    //           default:
+    //             return const Text('Loading...');
+    //
+    //         }
+    //       },
+    //     )
+    // );
   }
 }

@@ -5,6 +5,8 @@ import 'package:mynotes/view/login_view.dart';
 import 'package:mynotes/view/notes_view.dart';
 import 'package:mynotes/view/register_view.dart';
 import 'package:mynotes/view/verify_email_view.dart';
+
+import 'constants/routes.dart';
 import 'firebase_options.dart';
 
 void main() {
@@ -17,9 +19,9 @@ void main() {
     ),
     home: const HomePage(),
     routes: {
-      '/login/': (context) => const LoginView(),
-      '/register/': (context) => const RegisterView(),
-      '/notes/': (context) => const NotesView(),
+      loginRoute: (context) => const LoginView(),
+      registerRoute: (context) => const RegisterView(),
+      notesRoute: (context) => const NotesView(),
     },
   ));
 }
@@ -31,14 +33,13 @@ class HomePage extends StatelessWidget {
   Widget build(BuildContext context) {
     return FutureBuilder(
       future: Firebase.initializeApp(
-          options: DefaultFirebaseOptions.currentPlatform
-      ),
+          options: DefaultFirebaseOptions.currentPlatform),
       builder: (context, snapshot) {
-        switch(snapshot.connectionState){
+        switch (snapshot.connectionState) {
           case ConnectionState.done:
             final user = FirebaseAuth.instance.currentUser;
-            if (user != null){
-              if (user.emailVerified){
+            if (user != null) {
+              if (user.emailVerified) {
                 return const NotesView();
               } else {
                 return VerifyEmailView();

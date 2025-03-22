@@ -1,0 +1,2 @@
+/Users/oskartarka/Informatyka/Moje/flutter/podstawy podstaw/mynotes/android/app/.cxx/RelWithDebInfo/692ut6l5/x86_64/CMakeFiles/edit_cache.dir
+/Users/oskartarka/Informatyka/Moje/flutter/podstawy podstaw/mynotes/android/app/.cxx/RelWithDebInfo/692ut6l5/x86_64/CMakeFiles/rebuild_cache.dir

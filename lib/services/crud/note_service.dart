@@ -28,6 +28,7 @@ class NoteService {
 
   Future<void> _cacheNotes() async {
     final allNotes = await getAllNotes();
+    print(allNotes);
     _notes = allNotes.toList();
     _notesStreamController.add(_notes);
   }
@@ -226,10 +227,15 @@ class NoteService {
     await getNote(id: note.id);
 
     // update DB
-    final updatesCount = await db.update(noteTable, {
-      textColumn: text,
-      isSyncedWithCloudColumn: 0,
-    });
+    final updatesCount = await db.update(
+      noteTable,
+      {
+        textColumn: text,
+        isSyncedWithCloudColumn: 0,
+      },
+      where: 'id = ?',
+      whereArgs: [note.id],
+    );
 
     if (updatesCount == 0) {
       throw CouldNotUpdateNoteException();
@@ -302,7 +308,7 @@ class DatabaseNote {
 
   @override
   String toString() {
-    return 'Note, ID = $id, userId = $userId, isSyncedWithCloud = $isSyncedWithCloud}';
+    return 'Note, ID = $id, userId = $userId, isSyncedWithCloud = $isSyncedWithCloud, text = $text}';
   }
 
   @override

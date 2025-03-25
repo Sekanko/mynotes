@@ -82,6 +82,7 @@ class _NotesViewState extends State<NotesView> {
                       case ConnectionState.active:
                         if (snapshot.hasData) {
                           final allNotes = snapshot.data;
+                          print(allNotes);
                           return ListView.builder(
                             itemBuilder: (context, index) {
                               final note = allNotes[index];
